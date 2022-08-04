@@ -15,6 +15,7 @@ include 'header.php';
     </thead>
     <tbody>
     	<?php
+        //$obj->DataTableHandler($_GET);
     	  $records =  $obj->fetchRecord();
         $id = 1;
         foreach ($records as $record) { ?>
