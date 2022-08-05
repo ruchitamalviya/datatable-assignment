@@ -31,10 +31,16 @@ class Query
 		$columnname = $_GET['columns'][$columnindex]['data'];
 		$columnsortorder = $_GET['order'][0]['dir'];
 		$searchvalue = $_GET['search']['value'];
+		$searchByFromdate = $_GET['searchByFromdate'];
+		$searchByTodate =   $_GET['searchByTodate'];
 		//search
 		$searchQuery = "";
 		if($searchvalue != ''){
 			$searchQuery =  "and (name like '%".$searchvalue."%' or email like '%".$searchvalue."%' or sal like '%".$searchvalue."%')";
+		}
+		// Date filter
+		if($searchByFromdate != '' && $searchByTodate != ''){
+			$searchQuery .= " and (join_date between '".$searchByFromdate."' and '".$searchByTodate."' ) ";
 		}
 		//total no of record without filtering
 		$q = "SELECT count(*) as allcount FROM emp";
@@ -57,24 +63,25 @@ class Query
 		while($row = $emprecords->fetch_assoc()){
 
 			$data[] = array(
-				"id"     =>  $row['id'],
-				"name"   =>  $row['name'],
-				"email"  =>  $row['email'],
-				"sal"    =>  $row['sal']
+				"id"           =>  $row['id'],
+				"name"         =>  $row['name'],
+				"email"        =>  $row['email'],
+				"sal"          =>  $row['sal'],
+				"join_date"    =>  $row['join_date']
 			);
 		}
 		//response
 		$response = array(
-			"draw"             =>  intval($draw),
-			"recordsTotal"     => $totalwithoutfilter,
-			"recordsFiltered"  => $totalrecordwithfilter,		
-			"data"             =>  $data
+			"draw"             =>   intval($draw),
+			"recordsTotal"     =>   $totalwithoutfilter,
+			"recordsFiltered"  =>   $totalrecordwithfilter,		
+			"data"             =>   $data
 		);
 
 		echo json_encode($response);
+		die;
 	}
 }
-
 $obj = new Query();
 
 ?>
