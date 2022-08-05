@@ -3,14 +3,12 @@ jQuery(document).ready( function () {
 	         'processing' :true, 
 	         'serverSide' :true,        
 	        'ajax' :{
-	        	'url':'ajax-response.php'
-	        	dataFilter: function(data){
-            	var json = jQuery.parseJSON( data );
-            	console.log(json);
-       		 }
+	        	'url':'ajax-callback.php',
+	        	'type':'get'
 	        },
 
 	        'columns':[
+	        { data: 'id'},
 	        { data: 'name' },
 	        { data: 'email' },
 	        { data: 'sal' }

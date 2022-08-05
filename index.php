@@ -14,18 +14,7 @@ include 'header.php';
       </tr>
     </thead>
     <tbody>
-    	<?php
-        //$obj->DataTableHandler($_GET);
-    	  $records =  $obj->fetchRecord();
-        $id = 1;
-        foreach ($records as $record) { ?>
-        <tr>
-          <th scope="row"><?php echo $id++;?></th>
-          <td><?php echo $record['name'];?></td>
-          <td><?php echo $record['email'];?></td>
-          <td><?php echo $record['sal'];?></td>
-        </tr>
-     <?php } ?>
+           
     </tbody>
   </table>
 </div>
